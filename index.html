@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido de cuzinho</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0; /* Remove margens padrão */
+            background-color: black; /* Define a cor de fundo da tela inteira */
+            position: relative; /* Permite que os elementos filhos sejam posicionados em relação ao body */
+        }
+
+        p {
+            color: white;
+            font-size: 24px;
+            position: absolute; /* Permite que o texto seja posicionado em relação ao body */
+            top: 20px; /* Ajuste a posição do texto conforme necessário */
+            left: 50%;
+            transform: translateX(-50%); /* Centraliza o texto horizontalmente */
+        }
+
+        button {
+            height: 50px; /* Aumente a altura do botão para facilitar a interação */
+            width: 100px; /* Aumente a largura do botão para facilitar a interação */
+            background: white;
+            border-radius: 5px;
+            color: blue;
+            font-weight: 600;
+            position: absolute; /* Permite que o botão seja movido livremente */
+            cursor: pointer; /* Muda o cursor para indicar que é clicável */
+            z-index: 10; /* Garante que o botão fique acima de outros elementos */
+        }
+
+        a {
+            color: blue; /* Cor do texto do link */
+            text-decoration: none; /* Remove o sublinhado do link */
+        }
+
+        .answer {
+            display: none; /* Inicialmente escondido */
+            position: absolute; /* Para posicionar a resposta */
+            top: 50%; /* Centraliza verticalmente */
+            left: 50%; /* Centraliza horizontalmente */
+            transform: translate(-50%, -50%); /* Ajusta para centralizar */
+            font-size: 48px;
+            font-family: sans-serif;
+            font-weight: bold;
+            text-align: center; /* Centraliza o texto */
+            width: 100%; /* Faz a div ocupar toda a largura */
+            color: #FF6EB4; /* Cor inicial do texto */
+            animation: colorChange 3s infinite; /* Animação de mudança de cor */
+        }
+
+        @keyframes colorChange {
+            0% { color: #FF6EB4; }
+            25% { color: #FF4040; }
+            50% { color: #FFD700; }
+            75% { color: #00FF00; }
+            100% { color: #FF6EB4; }
+        }
+    </style>
+</head>
+<body>
+    <p>C*zinho hoje?</p>
+    <button id="no">Não</button>
+    <button id="yes">
+        <a href="https://link.com">SIM!</a>
+    </button>
+
+    <div class="answer" id="answer">
+        <p>Eu sabia! Te AMO 🫶</p>
+    </div>
+
+    <script>
+        let buttonNo = document.getElementById('no');
+        let buttonYes = document.getElementById('yes');
+        let answer = document.getElementById('answer');
+
+        // Função para mover o botão "Não" para uma posição aleatória
+        function moveButton() {
+            let height = window.innerHeight - buttonNo.offsetHeight; // Altura da janela menos a altura do botão
+            let width = window.innerWidth - buttonNo.offsetWidth; // Largura da janela menos a largura do botão
+            buttonNo.style.top = Math.random() * height + "px"; // Define a nova posição vertical
+            buttonNo.style.left = Math.random() * width + "px"; // Define a nova posição horizontal
+        }
+
+        // Adiciona eventos para mouse e toque
+        buttonNo.addEventListener('mouseover', moveButton); // Para desktop
+        buttonNo.addEventListener('click', moveButton); // Para dispositivos móveis
+        buttonNo.addEventListener('touchstart', moveButton); // Para dispositivos móveis
+
+        // Move o botão para uma posição inicial aleatória ao carregar a página
+        moveButton();
+
+        // Exibir a mensagem caso seja selecionado o 'sim'
+        buttonYes.addEventListener("click", function (event) {
+            event.preventDefault(); // Previne o comportamento padrão do link
+            answer.style.display = "block"; // Exibe a resposta
+        });
+    </script>
+</body>
+</html>
